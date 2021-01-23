@@ -1,0 +1,23 @@
+{
+  "name": "qhacks",
+  "version": "1.0.0",
+  "description": "QHacks 2021 Submission",
+  "main": "main.js",
+  "dependencies": {
+    "dcp-client": "^3.2.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinjycui/QHacks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinjycui/QHacks/issues"
+  },
+  "homepage": "https://github.com/kevinjycui/QHacks#readme"
+}
