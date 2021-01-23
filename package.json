@@ -4,6 +4,7 @@
   "description": "QHacks 2021 Submission",
   "main": "main.js",
   "dependencies": {
+    "axios": "^0.21.1",
     "dcp-client": "^3.2.6"
   },
   "devDependencies": {},
@@ -19,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/kevinjycui/QHacks/issues"
   },
-  "homepage": "https://github.com/kevinjycui/QHacks#readme"
+  "homepage": "https://github.com/kevinjycui/QHacks#readme",
+  "keywords": []
 }
