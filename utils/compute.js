@@ -1,7 +1,8 @@
 require('dcp-client').initSync();
 const compute = require('dcp/compute');
 
-async function run() {
+async function run(data) {
+
 	const job = compute.for(1, 10, function(n) {
 		let result = n+100;
 		progress('50%');
@@ -18,5 +19,5 @@ async function run() {
 }
 
 module.exports = {
-	run: run
+	run
 };

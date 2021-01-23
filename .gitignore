@@ -117,3 +117,6 @@ dist
 
 # DCP Keystore
 *.keystore
+
+# Google Cloud
+google-credentials.*

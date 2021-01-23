@@ -5,12 +5,10 @@
   "main": "main.js",
   "dependencies": {
     "axios": "^0.21.1",
-    "dcp-client": "^3.2.6"
+    "dcp-client": "^3.2.6",
+    "express": "^4.17.1"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "node main.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kevinjycui/QHacks.git"
@@ -21,5 +19,10 @@
     "url": "https://github.com/kevinjycui/QHacks/issues"
   },
   "homepage": "https://github.com/kevinjycui/QHacks#readme",
-  "keywords": []
+  "keywords": [],
+  "scripts": {
+    "start": "node ./app.js",
+    "dev": "nodemon ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }

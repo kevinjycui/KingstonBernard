@@ -9,12 +9,13 @@ const request = async (url) => {
 
 	try {
 		const response = await axios.request(options);
-		console.log(response.data);
+		return response.data;
 	} catch (err) {
 		console.log(err);
+		return {};
 	}
 };
 
 module.exports = {
-	request: request
+	request
 };
