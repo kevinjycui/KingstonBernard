@@ -17,4 +17,6 @@ async function run() {
 	console.log(results);
 }
 
-run();
+module.exports = {
+	run: run
+};
