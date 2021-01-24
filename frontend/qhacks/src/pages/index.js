@@ -5,15 +5,10 @@ import axios from 'axios'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
 const request = async (url) => {
-  const options = {
-    url: url,
-    params: {number: 8, type: 'Fire'},
-    method: 'get',
-          headers: {'Content-Type': 'application/json'}
-  };
-
   try {
-    const response = await axios.request(options);
+    const response = await axios.get(url, {
+      params: {number: 8, type: 'Fire'}
+    });
     return response.data;
   } catch (err) {
     console.log(err);
