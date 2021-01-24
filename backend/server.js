@@ -5,9 +5,9 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
-const port = process.env.PORT || 4000;
-const external_endpoint_kfr = process.env.EXT_ENDPOINT_KFR;
-const external_endpoint_roads = process.env.EXT_ENDPOINT_ROADS;
+const port = 4000;
+const external_endpoint_kfr = 'https://opendatakingston.cityofkingston.ca/api/records/1.0/search/?dataset=kfr-incidents&q=&rows=9999&refine.call_type=';
+const external_endpoint_roads = 'https://opendatakingston.cityofkingston.ca/api/records/1.0/search/?dataset=road-surface&q=&rows=9999';
 
 var express = require('express');
 

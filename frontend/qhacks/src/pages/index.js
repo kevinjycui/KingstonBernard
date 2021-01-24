@@ -75,7 +75,8 @@ class Index extends React.Component {
     this.state = { 
       markers: [],
       numberOfUnits: 1,
-      type: 'Fire'
+      type: 'Fire',
+      message: '',
     };
 
     this.handleUnitsChange = this.handleUnitsChange.bind(this);
@@ -86,11 +87,11 @@ class Index extends React.Component {
   GetData = async(numberOfUnits, type) => {
     // GET request using fetch with async/await
     const url = 'http://localhost:4000/data';
-    console.log("Asking for datas bro! -.-");
 
     const data = await request(url, numberOfUnits, type);
     console.log(data)
     this.setState({markers: data});
+    this.setState({message: 'Done!'});
 
     //this.setState({ totalReactPackages: data.total })
 
@@ -101,8 +102,12 @@ class Index extends React.Component {
   }
   
   handleUnitsChange(event) {
-    if (event.target.value < 100) 
-      this.setState({numberOfUnits: event.target.value});
+    if (event.target.value < 15) 
+      this.setState({numberOfUnits: event.target.value.replace(/[^\d]/,'')});
+    else if (event.target.value < 0)
+      this.setState({numberOfUnits: 0});
+    else
+      this.setState({numberOfUnits: 15});
   }
 
   handleTypeChange(event) {
@@ -111,7 +116,8 @@ class Index extends React.Component {
 
   handleUnitsSubmit(event) {
     event.preventDefault();
-    console.log(this.state)
+    this.setState({message: 'Processing...'});
+    this.setState({markers: []});
     this.GetData(this.state.numberOfUnits, this.state.type);
   }
 
@@ -161,6 +167,8 @@ class Index extends React.Component {
           </label>
           &nbsp;
           <input type="submit" value="Submit" />
+          &nbsp;
+          {this.state.message}
         </form>
 
         <br/>
