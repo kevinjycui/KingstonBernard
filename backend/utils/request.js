@@ -4,7 +4,7 @@ const request = async (url) => {
 	const options = {
 		url: url,
 		method: 'get',
-        	headers: {'Content-Type': 'application/json'}
+		headers: {'Content-Type': 'application/json'}
 	};
 
 	try {
