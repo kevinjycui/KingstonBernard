@@ -1,5 +1,5 @@
 import React from "react"
-
+import Helmet from "react-helmet"
 import axios from 'axios'
 
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
@@ -30,7 +30,6 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = { markers: [
-
     ] };
   }
 
@@ -66,11 +65,22 @@ class Index extends React.Component {
       <div style={{
         padding: 20
       }}>
-        <button style={{
-          margin: 20
-        }} onClick={this.GetData}>
-          Get the data
-        </button>
+        <Helmet>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous" defer></script>
+        </Helmet>
+        <form>
+          <label>
+            # of Data Points: &nbsp;
+            <input type="text" name="name" />
+          </label>
+          <button style={{
+            margin: 20
+          }} onClick={this.GetData}>
+            Get the data
+          </button>
+        </form>
+
         <MyMapComponent
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvO2Y5_5LeasBlRwuApzbWLTCRqdsHfwo&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}

@@ -16,8 +16,10 @@
   },
   "dependencies": {
     "gatsby": "^2.26.1",
+    "gatsby-plugin-react-helmet": "^3.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-google-maps": "^9.4.5"
+    "react-google-maps": "^9.4.5",
+    "react-helmet": "^6.1.0"
   }
 }
