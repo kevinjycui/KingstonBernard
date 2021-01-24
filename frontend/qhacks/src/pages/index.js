@@ -7,8 +7,8 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     defaultZoom={12}
     defaultCenter={{ lat: 44.2312, lng: -76.4860 }}
   >
+    {props.markerProp}
     {<Marker position={{ lat: 44.2312, lng: -76.4860 }} onClick={props.onMarkerClick}/>}
-    {<Marker position={{ lat: 44.2502931774, lng: -76.5120968535 }} onClick={props.onMarkerClick}/>}
   </GoogleMap>
 ))
 
@@ -52,6 +52,7 @@ class Index extends React.Component {
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
           onMarkerClick={this.HandleMarkerClick}
+          markerProp={<Marker position={{ lat: 44.2502931774, lng: -76.5120968535 }} onClick={this.HandleMarkerClick} />}
         >
 
         </MyMapComponent>
