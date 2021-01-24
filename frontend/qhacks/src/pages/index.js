@@ -1,6 +1,25 @@
 import React from "react"
 
+import axios from 'axios'
+
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+
+const request = async (url) => {
+  const options = {
+    url: url,
+    params: {number: 8, type: 'Fire'},
+    method: 'get',
+          headers: {'Content-Type': 'application/json'}
+  };
+
+  try {
+    const response = await axios.request(options);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    return {};
+  }
+};
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) =>
   <GoogleMap
@@ -8,7 +27,6 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     defaultCenter={{ lat: 44.2312, lng: -76.4860 }}
   >
     {props.markerProps}
-    {<Marker position={{ lat: 44.2312, lng: -76.4860 }} onClick={props.onMarkerClick}/>}
   </GoogleMap>
 ))
 
@@ -17,17 +35,21 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
     this.state = { markers: [
-      [44.2312, -76.4860],
-      [44.2502931774, -76.5120968535]
+
     ] };
   }
 
-  SendData = () => {
+  GetData = async() => {
     // GET request using fetch with async/await
-    const endPoint = 'localhost:4000/data';
+    const url = 'http://localhost:4000/data';
+    console.log("Asking for datas bro! -.-");
+
+    const data = await request(url);
+    console.log(data)
+    this.setState({markers: data});
 
     //this.setState({ totalReactPackages: data.total })
-    console.log("Sending the dataE bro! -.-");
+
   }
 
   HandleMarkerClick = () => {
@@ -49,16 +71,11 @@ class Index extends React.Component {
       <div style={{
         padding: 20
       }}>
-        <form onSubmit={this.SendData}>
-          <label >The data, bro: &nbsp; </label>
-          <input type="text" id="lname" name="lname" />
-          <br />
-          <button style={{
-            margin: 20
-          }} type="submit">
-            Send the data
-          </button>
-        </form>
+        <button style={{
+          margin: 20
+        }} onClick={this.GetData}>
+          Get the data
+        </button>
         <MyMapComponent
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvO2Y5_5LeasBlRwuApzbWLTCRqdsHfwo&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
