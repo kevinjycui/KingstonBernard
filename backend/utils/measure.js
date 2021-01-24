@@ -59,7 +59,7 @@ async function furthest_road(coordinate_array, road_array) {
 	road_array.forEach((road) => {
 		var distance = 999;
 		coordinate_array.forEach((coordinate) => {
-			distance = Math.min(distance, euclidean_distance(coordinate[0], coordinate[1], road[0], road[1]));
+			distance = Math.min(distance, euclidean_distance(coordinate[1], coordinate[0], road[0], road[1]));
 		});
 
 		if (distance > max_distance) {
