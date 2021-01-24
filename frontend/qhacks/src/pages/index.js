@@ -3,6 +3,49 @@ import React from "react"
 import axios from 'axios'
 
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import Image from '../components/Image';
+
+const Icon = () => {
+  return (
+    <>
+      <Image
+        src="icon.png"
+        className="mx-auto shadow-xl"
+        alt="Icon"
+        style={{
+          display: "inline-block",
+          width: "100px"
+        }}
+      />
+    </>
+  );
+};
+
+// styles
+const pageStyles = {
+  color: "#232129",
+  padding: "96px",
+  fontFamily: "-apple-system, Roboto, sans-serif, serif",
+}
+const headingStyles = {
+  marginTop: 0,
+  marginBottom: 0,
+  maxWidth: "100%",
+  marginLeft: "auto",
+  marginRight: "auto",
+  textAlign: "center"
+}
+
+const paragraphStyles = {
+  marginBottom: 48,
+}
+const codeStyles = {
+  color: "#8A6534",
+  padding: 4,
+  backgroundColor: "#FFF4DB",
+  // fontSize: "1.25rem",
+  borderRadius: 4,
+}
 
 const request = async (url) => {
   try {
@@ -63,6 +106,9 @@ class Index extends React.Component {
     }
 
     return (
+      <main style={pageStyles}>
+        <title>Kingston Bernard</title>
+        <h1 style={headingStyles}>{Icon()} Bernard - Kingston Emergency Services Prediction Tool</h1>
       <div style={{
         padding: 20
       }}>
@@ -74,7 +120,7 @@ class Index extends React.Component {
         <MyMapComponent
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvO2Y5_5LeasBlRwuApzbWLTCRqdsHfwo&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
+          containerElement={<div style={{ height: `800px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
           onMarkerClick={this.HandleMarkerClick}
           markerProps={marker_props}
@@ -82,6 +128,9 @@ class Index extends React.Component {
 
         </MyMapComponent>
       </div>
+
+      <p style={paragraphStyles}>See it on <a style={codeStyles} href='https://github.com/kevinjycui/QHacks'>GitHub</a> or <a style={codeStyles}>Devpost</a></p>
+    </main>
     )
   }
 }
