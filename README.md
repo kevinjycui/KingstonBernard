@@ -2,6 +2,26 @@
 
 ![](github/screenshot.png)
 
+## Try it out
+### Install dependencies
+```
+cd frontend/qhacks
+npm i
+cd backend
+npm i
+```
+### Run backend
+```
+cd backend
+node server.js
+```
+### Run frontend
+```
+cd frontend
+npm run develop
+```
+Go to [http://localhost:8000/](http://localhost:8000/) to see the app in action!
+
 ## Inspiration
 Emergencies are something that the city must handle on a day-today basis, and as residents of Kingston, we understand that every minute counts when responding to a call. We were thus inspired to use Kingston's Open Data resources to model an optimised distribution of emergency services across Kingston.
 
