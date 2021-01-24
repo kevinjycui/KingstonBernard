@@ -49,7 +49,7 @@ app.get('/data', async (req, res) => {
 	const data = await request(external_endpoint_roads);
 	var road_array = [];
 	data.records.forEach((record) => {
-		road_array.push(record.geometry.coordinates);
+		road_array.push([record.geometry.coordinates[1], record.geometry.coordinates[0]]);
 	});
 
 	console.log('Road', road_array[0])

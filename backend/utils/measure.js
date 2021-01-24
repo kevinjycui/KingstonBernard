@@ -17,10 +17,6 @@ async function get_kfr_coords(records) {
 }
 
 async function centroid(coords) {
-	if (coords.length === 0) {
-			return [0, 0];
-	}
-
 	var x = 0;
 	var y = 0;
 
@@ -32,7 +28,7 @@ async function centroid(coords) {
 	x /= coords.length;
 	y /= coords.length;
 
-	return [y, x];
+	return [x, y];
 }
 
 async function nearest_road(coordinates, road_array) {
@@ -53,7 +49,7 @@ async function nearest_road(coordinates, road_array) {
 		}
 	});
 
-	return [nearest_y, nearest_x];
+	return [nearest_x, nearest_y];
 }
 
 async function furthest_road(coordinate_array, road_array) {
@@ -66,7 +62,7 @@ async function furthest_road(coordinate_array, road_array) {
 	road_array.forEach((road) => {
 		var distance = 999;
 		coordinate_array.forEach((coordinate) => {
-			distance = Math.min(distance, euclidean_distance(coordinate[1], coordinate[0], road[0], road[1]));
+			distance = Math.min(distance, euclidean_distance(coordinate[0], coordinate[1], road[0], road[1]));
 		});
 
 		if (distance > max_distance) {
@@ -76,7 +72,7 @@ async function furthest_road(coordinate_array, road_array) {
 		}
 	});
 
-	return [furthest_y, furthest_x];
+	return [furthest_x, furthest_y];
 }
 
 
