@@ -8,8 +8,8 @@ app.get('/', function(req, res) {
 });
 
 app.get('/raw_data', async (req, res) => {
-	const EXT_ENDPOINT = 'https://opendatakingston.cityofkingston.ca/api/records/1.0/search/?dataset=trails&q=&facet=trailname&facet=activities&facet=trail_class&facet=accessible';
-	const data = await request(EXT_ENDPOINT);
+	const external_endpoint = 'https://opendatakingston.cityofkingston.ca/api/records/1.0/search/?dataset=trails&q=&facet=trailname&facet=activities&facet=trail_class&facet=accessible';
+	const data = await request(external_endpoint);
 	res.send(data);
 });
 

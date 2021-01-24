@@ -1,17 +1,18 @@
 require('dcp-client').initSync();
 const compute = require('dcp/compute');
 const { request } = require('./request');
-const { euclidean_distance } = require('./measure');
 
 const external_endpoint = 'https://opendatakingston.cityofkingston.ca/api/records/1.0/search/?dataset=trails&q=&facet=trailname&facet=activities&facet=trail_class&facet=accessible';
 
-async function run(data) {
+async function run(data, distance, offset) {
 
 	try {
 
 		const data = await request(external_endpoint).records;
 	
-		const job = compute.for(0, 100, function(n) {
+		const job = compute.for(0, data.length, function(n, distance, offset) {
+
+			record = data[n];
 			let result = n+100;
 			progress('50%');
 			result = result * n;

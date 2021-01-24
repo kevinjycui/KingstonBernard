@@ -1,7 +1,7 @@
 const { request } = require('./request');
-const { run } = require('./compute');
+const { euclidean_distance, centroid } = require('./measure');
 
 module.exports = {
 	request,
-	run
+	centroid
 };
