@@ -101,7 +101,8 @@ class Index extends React.Component {
   }
   
   handleUnitsChange(event) {
-    this.setState({numberOfUnits: event.target.value});
+    if (event.target.value < 100) 
+      this.setState({numberOfUnits: event.target.value});
   }
 
   handleTypeChange(event) {
