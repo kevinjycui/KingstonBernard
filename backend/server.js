@@ -38,11 +38,7 @@ app.get('/data', async (req, res) => {
 
 	var kfr_coords = await get_kfr_coords((await request(external_endpoint_kfr + type)).records);
 
-	console.log('KFR', kfr_coords[0])
-
 	const centroid_coord = await centroid(kfr_coords);
-
-	console.log('Centroid', centroid_coord)
 
 	const data = await request(external_endpoint_roads);
 	var road_array = [];
@@ -50,19 +46,13 @@ app.get('/data', async (req, res) => {
 		road_array.push([record.geometry.coordinates[1], record.geometry.coordinates[0]]);
 	});
 
-	console.log('Road', road_array[0])
-
 	var kpoints = [await nearest_road(centroid_coord, road_array)];
-
-	console.log('KPoint 0', kpoints[0])
 
 	for (var j=0; j<number-1; j++)
 		kpoints.push(
 			await nearest_road(await furthest_road(kpoints, kfr_coords), road_array)
 		);
-
-	console.log('KPoint 1', kpoints[1])
-
+	
 	res.send(kpoints);
 })
 
