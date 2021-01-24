@@ -12,7 +12,7 @@ npm i
 ```
 ### Build static frontend
 ```
-cd frontend
+cd frontend/qhacks
 npm run build
 ```
 ### Run backend
