@@ -7,7 +7,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
     defaultZoom={12}
     defaultCenter={{ lat: 44.2312, lng: -76.4860 }}
   >
-    {props.markerProp}
+    {props.markerProps}
     {<Marker position={{ lat: 44.2312, lng: -76.4860 }} onClick={props.onMarkerClick}/>}
   </GoogleMap>
 ))
@@ -16,7 +16,10 @@ class Index extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = { markers: [
+      [44.2312, -76.4860],
+      [44.2502931774, -76.5120968535]
+    ] };
   }
 
   SendData = () => {
@@ -32,6 +35,16 @@ class Index extends React.Component {
   }
 
   render() {
+
+    // here we generate the marker props
+    var marker_props = [];
+
+    for (var i = 0; i < this.state.markers.length; i++)
+    {
+      var marker = this.state.markers[i];
+      marker_props.push(<Marker key={i} position={{ lat: marker[0], lng: marker[1] }} onClick={this.HandleMarkerClick} />);
+    }
+
     return (
       <div style={{
         padding: 20
@@ -52,7 +65,7 @@ class Index extends React.Component {
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
           onMarkerClick={this.HandleMarkerClick}
-          markerProp={<Marker position={{ lat: 44.2502931774, lng: -76.5120968535 }} onClick={this.HandleMarkerClick} />}
+          markerProps={marker_props}
         >
 
         </MyMapComponent>
