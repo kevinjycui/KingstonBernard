@@ -1,7 +1,9 @@
 const { request } = require('./request');
-const { euclidean_distance, centroid } = require('./measure');
+const { centroid, nearest_road, furthest_road } = require('./measure');
 
 module.exports = {
 	request,
-	centroid
+	centroid,
+	nearest_road,
+	furthest_road
 };
