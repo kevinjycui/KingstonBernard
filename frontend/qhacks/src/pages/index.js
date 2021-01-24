@@ -47,10 +47,10 @@ const codeStyles = {
   borderRadius: 4,
 }
 
-const request = async (url) => {
+const request = async (url, numberOfUnits, type) => {
   try {
     const response = await axios.get(url, {
-      params: {number: this.state.numberOfUnits, type: this.state.type}
+      params: {number: numberOfUnits, type: type}
     });
     return response.data;
   } catch (err) {
@@ -83,12 +83,12 @@ class Index extends React.Component {
     this.handleUnitsSubmit = this.handleUnitsSubmit.bind(this);
   }
 
-  GetData = async() => {
+  GetData = async(numberOfUnits, type) => {
     // GET request using fetch with async/await
     const url = 'http://localhost:4000/data';
     console.log("Asking for datas bro! -.-");
 
-    const data = await request(url);
+    const data = await request(url, numberOfUnits, type);
     console.log(data)
     this.setState({markers: data});
 
@@ -109,8 +109,9 @@ class Index extends React.Component {
   }
 
   handleUnitsSubmit(event) {
+    event.preventDefault();
     console.log(this.state)
-    this.GetData();
+    this.GetData(this.state.numberOfUnits, this.state.type);
   }
 
   render() {
@@ -137,7 +138,7 @@ class Index extends React.Component {
         </Helmet>
 
         
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleUnitsSubmit}>
           <label>
             Number of Available Units: &nbsp;
             <input
