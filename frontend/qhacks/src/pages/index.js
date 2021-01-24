@@ -50,7 +50,7 @@ const codeStyles = {
 const request = async (url) => {
   try {
     const response = await axios.get(url, {
-      params: {number: 8, type: 'Fire'}
+      params: {number: this.state.numberOfUnits, type: this.state.type}
     });
     return response.data;
   } catch (err) {
@@ -72,8 +72,15 @@ class Index extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { markers: [
-    ] };
+    this.state = { 
+      markers: [],
+      numberOfUnits: 1,
+      type: 'Fire'
+    };
+
+    this.handleUnitsChange = this.handleUnitsChange.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);
+    this.handleUnitsSubmit = this.handleUnitsSubmit.bind(this);
   }
 
   GetData = async() => {
@@ -91,6 +98,19 @@ class Index extends React.Component {
 
   HandleMarkerClick = () => {
     console.log("Marker click")
+  }
+  
+  handleUnitsChange(event) {
+    this.setState({numberOfUnits: event.target.value});
+  }
+
+  handleTypeChange(event) {
+    this.setState({type: event.target.value});
+  }
+
+  handleUnitsSubmit(event) {
+    console.log(this.state)
+    this.GetData();
   }
 
   render() {
@@ -115,17 +135,33 @@ class Index extends React.Component {
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous" defer></script>
         </Helmet>
-        <form>
+
+        
+        <form onSubmit={this.handleSubmit}>
           <label>
-            # of Data Points: &nbsp;
-            <input type="text" name="name" />
+            Number of Available Units: &nbsp;
+            <input
+                name="numberOfUnits"
+                type="number"
+                value={this.state.numberOfUnits}
+                onChange={this.handleUnitsChange} />
+        </label>
+        <label>
+            &nbsp;Call Type: &nbsp;
+            <select value={this.state.type} onChange={this.handleTypeChange}>
+                <option value="Fire">Fire</option>
+                <option value="Medical">Medical</option>
+                <option value="Motor Vehicle Accident">Motor Vehicle Accident</option>
+                <option value="CO Alarm">CO Alarm</option>
+                <option value="Structure Rescue">Structure Rescue</option>
+                <option value="Water Rescue">Water Rescue</option>
+            </select>
           </label>
-          <button style={{
-            margin: 20
-          }} onClick={this.GetData}>
-            Get the data
-          </button>
+          &nbsp;
+          <input type="submit" value="Submit" />
         </form>
+
+        <br/>
 
         <MyMapComponent
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvO2Y5_5LeasBlRwuApzbWLTCRqdsHfwo&v=3.exp&libraries=geometry,drawing,places"
@@ -139,7 +175,7 @@ class Index extends React.Component {
         </MyMapComponent>
       </div>
 
-      <p style={paragraphStyles}>See it on <a style={codeStyles} href='https://github.com/kevinjycui/QHacks'>GitHub</a> or <a style={codeStyles}>Devpost</a></p>
+      <p style={paragraphStyles}>See it on <a style={codeStyles} href='https://github.com/kevinjycui/KingstonBernard'>GitHub</a> or <a style={codeStyles} href='https://devpost.com/software/kingston-bernard'>Devpost</a></p>
     </main>
     )
   }
