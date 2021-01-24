@@ -3,7 +3,7 @@ const compute = require('dcp/compute');
 
 
 function euclidean_distance(x1, y1, x2, y2) {
-	return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+	return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 }
 
 async function centroid(records) {
@@ -50,13 +50,6 @@ async function nearest_road(coordinates, road_array) {
 }
 
 async function furthest_road(coordinate_array, road_array) {
-	var x = [];
-	var y = []
-
-	coordinate_array.forEach((coordinate) => {
-		x.push(coordinate[0]);
-		y.push(coordinate[1]);
-	})
 
 	var furthest_x = 0;
 	var furthest_y = 0;
@@ -64,14 +57,13 @@ async function furthest_road(coordinate_array, road_array) {
 	var max_distance = 0;
 
 	road_array.forEach((road) => {
-		
-		var min_distance = 1 << 30;
-		
-		for (var i=0; i<coordinate_array.length; i++)
-			min_distance = Math.min(min_distance, euclidean_distance(road[0], road[1], x[i], y[i]));
+		var distance = 999;
+		coordinate_array.forEach((coordinate) => {
+			distance = Math.min(distance, euclidean_distance(coordinate[0], coordinate[1], road[0], road[1]));
+		});
 
-		if (min_distance > max_distance) {
-			max_distance = min_distance;
+		if (distance > max_distance) {
+			max_distance = distance;
 			furthest_x = road[0];
 			furthest_y = road[1];
 		}

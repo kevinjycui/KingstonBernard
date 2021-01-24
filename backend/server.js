@@ -33,6 +33,10 @@ app.get('/raw_data', async (req, res) => {
 
 app.get('/data', async (req, res) => {
 	const { number, type } = req.body;
+	if (number == null)
+		number = 1;
+	if (type == null)
+		type = 'Fire';
 	const centroid_coord = await centroid((await request(external_endpoint_kfr + type)).records);
 	const data = await request(external_endpoint_roads);
 	var road_array = [];
