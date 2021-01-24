@@ -6,26 +6,29 @@ function euclidean_distance(x1, y1, x2, y2) {
 	return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 }
 
-async function centroid(records) {
-	if (records.length === 0) {
-			return [0, 0];
+async function get_kfr_coords(records) {
+	var coords = [];
+	for (var i=0; i<records.length; i++)  {
+		var record = records[i].fields;
+		if ('geo_point_2d' in record)
+				coords.push(record.geo_point_2d)
 	}
+	return coords;
+}
 
+async function centroid(coords) {
 	var x = 0;
 	var y = 0;
 
-	for (var i=0; i<records.length; i++)  {
-			var record = records[i].fields;
-			if ('geo_point_2d' in record) {
-					x += record.geo_point_2d[0];
-					y += record.geo_point_2d[1];
-			}
-	}
+	coords.forEach((coord) => {
+		x += coord[0];
+		y += coord[1];
+	})
 
-	x /= records.length;
-	y /= records.length;
+	x /= coords.length;
+	y /= coords.length;
 
-	return [y, x];
+	return [x, y];
 }
 
 async function nearest_road(coordinates, road_array) {
@@ -46,7 +49,7 @@ async function nearest_road(coordinates, road_array) {
 		}
 	});
 
-	return [nearest_y, nearest_x];
+	return [nearest_x, nearest_y];
 }
 
 async function furthest_road(coordinate_array, road_array) {
@@ -69,11 +72,12 @@ async function furthest_road(coordinate_array, road_array) {
 		}
 	});
 
-	return [furthest_y, furthest_x];
+	return [furthest_x, furthest_y];
 }
 
 
 module.exports = {
+	get_kfr_coords,
 	centroid,
 	nearest_road,
 	furthest_road
