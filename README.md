@@ -10,6 +10,11 @@ npm i
 cd backend
 npm i
 ```
+### Build static frontend
+```
+cd frontend
+npm run build
+```
 ### Run backend
 ```
 cd backend
