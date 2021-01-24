@@ -33,10 +33,8 @@ app.get('/raw_data', async (req, res) => {
 
 app.get('/data', async (req, res) => {
 	const { number, type } = req.body;
-	if (number == null)
-		number = 1;
-	if (type == null)
-		type = 'Fire';
+	if (number == null || type == null)
+		res.send('Please add a number and a type');
 
 	var kfr_coords = await get_kfr_coords((await request(external_endpoint_kfr + type)).records);
 
